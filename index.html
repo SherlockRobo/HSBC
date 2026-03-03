@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>汇丰控股 (00005) 指引对标与挂单推演版 V18</title>
+    <title>汇丰控股 (00005) 估值火控中心 V21 增长溢价版</title>
     <style>
         :root {
             --bg-color: #121212; --card-bg: #1e1e1e; --text-color: #e0e0e0;
-            --hsbc-red: #db0011; --cyan: #00bcd4; --green: #4caf50; --gold: #ffd700;
-            --border-color: #333; --purple: #9c27b0;
+            --hsbc-red: #db0011; --cyan: #00bcd4; --green: #4caf50; --border-color: #333; --purple: #9c27b0; --gold: #ffd700;
         }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         .container { max-width: 1150px; width: 100%; }
         header { text-align: center; margin-bottom: 25px; padding: 20px; border-bottom: 3px solid var(--hsbc-red); background: linear-gradient(90deg, #121212, #2a0a0a, #121212); border-radius: 12px; }
         .version-badge { background-color: var(--hsbc-red); color: #fff; padding: 3px 10px; border-radius: 6px; font-size: 0.55em; vertical-align: middle; margin-left: 10px; font-weight: bold;}
         
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; margin-bottom: 20px; }
-        
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; margin-bottom: 20px; }
         .panel { background-color: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); }
         .panel-title { font-size: 1.1rem; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; border-bottom: 1px dashed #333; padding-bottom: 10px;}
         .panel-title.red { color: var(--hsbc-red); }
         .panel-title.cyan { color: var(--cyan); }
-        .panel-title.gold { color: var(--gold); }
         
         .input-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .input-group label { font-size: 0.9rem; color: #bbb; }
-        .input-group input { background-color: #121212; border: 1px solid #555; color: #fff; padding: 8px; border-radius: 6px; font-size: 1.1rem; width: 110px; text-align: right; transition: all 0.3s;}
+        .input-group input { background-color: #121212; border: 1px solid #555; color: #fff; padding: 8px; border-radius: 6px; font-size: 1.1rem; width: 100px; text-align: right; transition: all 0.3s;}
         .input-group input:focus { border-color: var(--cyan); outline: none; box-shadow: 0 0 8px var(--cyan);}
         
-        .highlight-input { border: 2px solid var(--gold) !important; color: var(--gold) !important; font-weight: bold; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 25px 0; }
+        .card { background-color: var(--card-bg); padding: 25px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); border-top-width: 6px; display: flex; flex-direction: column; justify-content: center;}
+        .card h3 { margin: 0 0 10px 0; color: #aaa; font-size: 1rem; font-weight: normal; }
+        .metric { font-size: 2.8rem; font-weight: bold; color: #fff; margin-bottom: 10px; }
+        .metric-sub { font-size: 0.95rem; color: #888; background: #222; padding: 8px 12px; border-radius: 6px; display: inline-block; margin: 0 auto;}
 
-        .compare-container { background-color: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); width: 100%; margin-top: 15px;}
+        .table-container { background-color: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); width: 100%; margin-top: 15px;}
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 16px; text-align: center; border-bottom: 1px solid var(--border-color); }
-        th { background-color: #222; color: var(--cyan); font-weight: normal; font-size: 0.95rem;}
-        .highlight-col { background-color: rgba(255, 215, 0, 0.05); font-weight: bold; color: var(--gold); }
+        th, td { padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); }
+        th { background-color: #222; color: var(--cyan); font-weight: normal; font-size: 0.9rem;}
         
-        .formula-box { background-color: rgba(219, 0, 17, 0.05); border-left: 4px solid var(--hsbc-red); padding: 15px; margin-bottom: 20px; font-size: 0.9rem; color: #ccc; border-radius: 0 8px 8px 0;}
+        .formula-box { background-color: rgba(0, 188, 212, 0.05); border-left: 4px solid var(--cyan); padding: 15px; margin-bottom: 20px; font-size: 0.9rem; color: #ccc; border-radius: 0 8px 8px 0;}
     </style>
 </head>
 <body>
@@ -44,154 +44,162 @@
 <div class="container">
     <header>
         <h1 style="margin: 0; font-size: 1.8rem; display: flex; align-items: center; justify-content: center;">
-            🏦 汇丰控股 (00005) 挂单指标推演中心 <span class="version-badge">V18 指引对标版</span>
+            🏦 汇丰控股 (00005) 火控中心 <span class="version-badge">V21 增长溢价版</span>
         </h1>
-        <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #888;">对标 2026-2028 官方指引：ROTE 17% | 分红 50%</p>
+        <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #888;">综合财报指引：ROTE 17% | Payout 50% | TNAV 复利增长 </p>
     </header>
 
     <div class="grid-layout">
         <div class="panel" style="border-top: 3px solid var(--hsbc-red);">
-            <h3 class="panel-title red">🏢 第一步：锁定官方财报与指引</h3>
+            <h3 class="panel-title red">🏢 第一步：锁定官方指引数据</h3>
             <div class="input-group">
                 <label>每股有形净资产 (TNAV HK$)</label>
                 <input type="number" id="in_tnav" value="75.19" step="0.01" oninput="calculate()">
             </div>
             <div class="input-group">
-                <label>官方 ROTE 指引 (%)</label>
+                <label>官方 ROTE 目标指引 (%)</label>
                 <input type="number" id="in_rote" value="17.0" step="0.1" oninput="calculate()">
             </div>
             <div class="input-group">
-                <label>官方派息比率指引 (%)</label>
-                <input type="number" id="in_payout" value="50" step="1" oninput="calculate()">
-            </div>
-            <div style="margin-top: 15px; font-size: 0.85rem; color: #777; background: #2a0a0a; padding: 10px; border-radius: 4px;">
-                💡 2025 财报期末 TNAV 为 $9.64 USD [cite: 2067]。<br>
-                💡 官方承诺 26-28 年 ROTE ≥17% 。
+                <label style="color:var(--cyan); font-weight:bold;">预期 TNAV 年化增长 (%)</label>
+                <input type="number" id="in_growth" value="5.0" step="0.1" oninput="calculate()">
             </div>
         </div>
 
-        <div class="panel" style="border-top: 3px solid var(--gold);">
-            <h3 class="panel-title gold">🎯 第二步：录入现价与你的拟买入价</h3>
+        <div class="panel" style="border-top: 3px solid var(--cyan);">
+            <h3 class="panel-title cyan">🎯 第二步：设定行情与期望收益</h3>
             <div class="input-group">
-                <label>市场当前市价 (HK$)</label>
+                <label>市场当前现价 (HK$)</label>
                 <input type="number" id="mkt_price" value="139.0" step="0.1" oninput="calculate()">
             </div>
             <div class="input-group">
-                <label style="color:var(--gold); font-weight:bold;">你的拟买入价 (HK$)</label>
-                <input type="number" id="buy_price" value="75.0" class="highlight-input" step="0.1" oninput="calculate()">
+                <label style="color:var(--cyan); font-weight:bold;">你的拟买入/持有成本 (HK$)</label>
+                <input type="number" id="buy_price" value="75.19" step="0.1" oninput="calculate()">
             </div>
-            <div class="input-group" style="margin-top: 25px;">
-                <label>你的期望股息底线 (%)</label>
+            <div class="input-group">
+                <label style="color:var(--gold); font-weight:bold;">期望目标股息率 (%)</label>
                 <input type="number" id="target_yield" value="7.5" step="0.1" oninput="calculate()">
             </div>
         </div>
     </div>
 
-    <div class="panel-title cyan" style="margin-top: 10px; border-bottom: none; margin-bottom: 5px;">
-        📊 估值指标深度对比：基于 17% ROTE 指引落地
+    <div class="metrics-grid">
+        <div class="card" id="card_fair" style="border-top-color: #fff;">
+            <h3>理论买入价 (含增长)</h3>
+            <div class="metric" id="out_fair_price">HK$ 0.00</div>
+            <div class="metric-sub">对应指引 PB 锚点: <span id="out_target_pb">0.00</span></div>
+        </div>
+        
+        <div class="card" id="card_mkt_margin">
+            <h3>市场现价安全边际</h3>
+            <div class="metric" id="out_mkt_margin">0.0%</div>
+            <div class="metric-sub">现价对应指引股息: <span id="out_sim_yield">0.0%</span></div>
+        </div>
+        
+        <div class="card" id="card_buy_margin">
+            <h3>你的成本安全边际</h3>
+            <div class="metric" id="out_buy_margin">0.0%</div>
+            <div class="metric-sub">你的建仓/拟买入 PB: <span id="out_buy_pb">0.00</span></div>
+        </div>
     </div>
-    <div class="compare-container">
+
+    <div class="formula-box">
+        <strong>💡 估值引擎：</strong> 理论买入价 = [年度派息 × (1 + 预期增长)] ÷ 期望股息率。增加增长预期，会显著提升你愿意支付的合理溢价。
+    </div>
+
+    <div class="panel-title cyan" style="margin-top: 10px; border-bottom: none; margin-bottom: 5px;">
+        ⏳ 长期持有效果推演：分红与净资产双杀增长
+    </div>
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>衡量指标</th>
-                    <th>市场现价视角 (139.0)</th>
-                    <th class="highlight-col">你拟买入价视角 (75.0)</th>
-                    <th>优势 / 差距</th>
+                    <th>持有阶段</th>
+                    <th>推演每股 TNAV</th>
+                    <th>推演每股分红 (DPS)</th>
+                    <th style="color:var(--purple); font-weight:bold; background: rgba(156, 39, 176, 0.05);">你的成本股息率 (YOC)</th>
+                    <th>预期市值 (假设估值不变)</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>指引每股收益 (EPS)</td>
-                    <td id="eps_val">HK$ 0.00</td>
-                    <td class="highlight-col" id="eps_val_2">HK$ 0.00</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>指引每股分红 (DPS)</td>
-                    <td id="dps_val">HK$ 0.00</td>
-                    <td class="highlight-col" id="dps_val_2">HK$ 0.00</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>**指引股息率 (YOC)**</td>
-                    <td id="mkt_yield" style="color:var(--hsbc-red)">0.00%</td>
-                    <td class="highlight-col" id="buy_yield">0.00%</td>
-                    <td id="yield_gap" style="color:var(--green); font-weight:bold;">-</td>
-                </tr>
-                <tr>
-                    <td>**市净率 (PB)**</td>
-                    <td id="mkt_pb" style="color:var(--hsbc-red)">0.00</td>
-                    <td class="highlight-col" id="buy_pb">0.00</td>
-                    <td id="pb_gap" style="color:var(--green);">已打折 0%</td>
-                </tr>
-                <tr>
-                    <td>**市盈率 (PE)**</td>
-                    <td id="mkt_pe">0.00</td>
-                    <td class="highlight-col" id="buy_pe">0.00</td>
-                    <td id="pe_status">-</td>
-                </tr>
+            <tbody id="table_body">
             </tbody>
         </table>
-    </div>
-
-    <div class="formula-box" style="margin-top: 25px;">
-        <strong>📋 决策摘要：</strong> 为了达到你设定的 <span id="user_yld">7.5</span>% 股息底线，你认为的合理最高出价应为 <strong id="fair_price" style="color:var(--green)">HK$ 0.00</strong>。
-        目前的挂单价相对于市场现价，在 PB 估值上获得了 <strong id="pb_discount" style="color:var(--gold)">0%</strong> 的安全垫。
     </div>
 </div>
 
 <script>
     function calculate() {
+        // 输入获取 
         let tnav = parseFloat(document.getElementById('in_tnav').value) || 75.19;
         let rote = (parseFloat(document.getElementById('in_rote').value) || 17.0) / 100;
-        let payout = (parseFloat(document.getElementById('in_payout').value) || 50) / 100;
+        let growth = (parseFloat(document.getElementById('in_growth').value) || 5.0) / 100;
+        let targetYield = (parseFloat(document.getElementById('target_yield').value) || 7.5) / 100;
         
         let mktPrice = parseFloat(document.getElementById('mkt_price').value) || 139.0;
-        let buyPrice = parseFloat(document.getElementById('buy_price').value) || 75.0;
-        let targetYield = (parseFloat(document.getElementById('target_yield').value) || 7.5) / 100;
+        let buyPrice = parseFloat(document.getElementById('buy_price').value) || 75.19;
+        let payout = 0.50; // 官方指引 50% 
 
-        // 1. 基于指引的盈利推算 (对两者都一样)
+        // 核心计算
         let eps = tnav * rote;
         let dps = eps * payout;
-
-        document.getElementById('eps_val').innerText = "HK$ " + eps.toFixed(2);
-        document.getElementById('eps_val_2').innerText = "HK$ " + eps.toFixed(2);
-        document.getElementById('dps_val').innerText = "HK$ " + dps.toFixed(2);
-        document.getElementById('dps_val_2').innerText = "HK$ " + dps.toFixed(2);
-
-        // 2. 现价视角指标
-        let mktYield = (dps / mktPrice) * 100;
-        let mktPb = mktPrice / tnav;
-        let mktPe = mktPrice / eps;
-
-        document.getElementById('mkt_yield').innerText = mktYield.toFixed(2) + "%";
-        document.getElementById('mkt_pb').innerText = mktPb.toFixed(2);
-        document.getElementById('mkt_pe').innerText = mktPe.toFixed(2);
-
-        // 3. 拟买入价视角指标
-        let buyYield = (dps / buyPrice) * 100;
-        let buyPb = buyPrice / tnav;
-        let buyPe = buyPrice / eps;
-
-        document.getElementById('buy_yield').innerText = buyYield.toFixed(2) + "%";
-        document.getElementById('buy_pb').innerText = buyPb.toFixed(2);
-        document.getElementById('buy_pe').innerText = buyPe.toFixed(2);
-
-        // 4. 差距与分析
-        let yieldGap = buyYield - mktYield;
-        document.getElementById('yield_gap').innerText = "+" + yieldGap.toFixed(2) + "%";
         
-        let pbDiscount = ((mktPb - buyPb) / mktPb) * 100;
-        document.getElementById('pb_gap').innerText = "便宜 " + pbDiscount.toFixed(1) + "%";
-        document.getElementById('pb_discount').innerText = pbDiscount.toFixed(1) + "%";
+        // 考虑增长后的合理价 (类似 SCHD 模型)
+        // 合理价 = 下一年预期分红 / 期望收益率
+        let fairPrice = (dps * (1 + growth)) / targetYield;
 
-        document.getElementById('pe_status').innerText = buyPe < 10 ? "进入低估区" : "合理区";
+        // 更新 UI
+        document.getElementById('out_fair_price').innerText = "HK$ " + fairPrice.toFixed(2);
+        document.getElementById('out_target_pb').innerText = (fairPrice / tnav).toFixed(2);
+        document.getElementById('out_sim_yield').innerText = ((dps / mktPrice) * 100).toFixed(2) + "%";
+        document.getElementById('out_buy_pb').innerText = (buyPrice / tnav).toFixed(2);
 
-        // 5. 结论输出
-        let fairPrice = dps / targetYield;
-        document.getElementById('fair_price').innerText = "HK$ " + fairPrice.toFixed(2);
-        document.getElementById('user_yld').innerText = (targetYield * 100).toFixed(1);
+        // 红绿灯边际
+        let mktMargin = (fairPrice - mktPrice) / fairPrice;
+        let buyMargin = (fairPrice - buyPrice) / fairPrice;
+
+        updateCard('card_mkt_margin', 'out_mkt_margin', mktMargin);
+        updateCard('card_buy_margin', 'out_buy_margin', buyMargin);
+
+        // 增长表格推演
+        let years = [0, 1, 3, 5, 8, 10];
+        let tbody = document.getElementById('table_body');
+        tbody.innerHTML = "";
+
+        years.forEach(year => {
+            // TNAV 按预期增长率复利
+            let futureTnav = tnav * Math.pow(1 + growth, year);
+            let futureDps = futureTnav * rote * payout;
+            let futureYoc = (futureDps / buyPrice) * 100;
+            let futureValue = buyPrice * Math.pow(1 + growth, year);
+
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${year === 0 ? '建仓当年' : '第 ' + year + ' 年'}</td>
+                <td>HK$ ${futureTnav.toFixed(2)}</td>
+                <td style="color:var(--green)">HK$ ${futureDps.toFixed(2)}</td>
+                <td style="color:var(--purple); font-weight:bold; background: rgba(156, 39, 176, 0.05);">${futureYoc.toFixed(2)}%</td>
+                <td style="color:var(--gold)">HK$ ${futureValue.toFixed(2)}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function updateCard(cardId, textId, margin) {
+        let card = document.getElementById(cardId);
+        let text = document.getElementById(textId);
+        let mText = (margin * 100).toFixed(1) + "%";
+        text.innerText = margin > 0 ? "+" + mText : mText;
+
+        if (margin > 0.1) {
+            text.style.color = "var(--green)";
+            card.style.borderTopColor = "var(--green)";
+        } else if (margin >= 0) {
+            text.style.color = "var(--cyan)";
+            card.style.borderTopColor = "var(--cyan)";
+        } else {
+            text.style.color = "var(--hsbc-red)";
+            card.style.borderTopColor = "var(--hsbc-red)";
+        }
     }
 
     window.onload = calculate;
