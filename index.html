@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汇丰控股 (00005) 港股本土估值器 V13</title>
+    <style>
+        :root {
+            --bg-color: #121212; --card-bg: #1e1e1e; --text-color: #e0e0e0;
+            --hsbc-red: #db0011; 
+            --cyan: #00bcd4; --green: #4caf50; --border-color: #333; --purple: #9c27b0;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 1050px; width: 100%; }
+        
+        header { 
+            text-align: center; margin-bottom: 20px; padding: 15px; border-radius: 12px;
+            border-bottom: 3px solid var(--hsbc-red);
+            background: linear-gradient(90deg, #121212, #2a0a0a, #121212);
+        }
+        
+        .version-badge { background-color: var(--hsbc-red); color: #fff; padding: 3px 10px; border-radius: 6px; font-size: 0.55em; vertical-align: middle; margin-left: 10px; font-weight: bold;}
+        
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        
+        .panel { background-color: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .panel-title { font-size: 1.1rem; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; border-bottom: 1px dashed #333; padding-bottom: 10px;}
+        .panel-title.red { color: var(--hsbc-red); }
+        .panel-title.cyan { color: var(--cyan); }
+        
+        .input-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .input-group label { font-size: 0.9rem; color: #bbb; }
+        .input-group input { background-color: #121212; border: 1px solid #555; color: #fff; padding: 8px; border-radius: 6px; font-size: 1.1rem; width: 105px; text-align: right; transition: all 0.3s;}
+        .input-group input:focus { border-color: var(--hsbc-red); outline: none; box-shadow: 0 0 5px var(--hsbc-red);}
+        
+        .quad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; background: #222; padding: 15px; border-radius: 8px; border: 1px dashed #555;}
+        .quad-item { display: flex; flex-direction: column; }
+        .quad-item label { font-size: 0.85rem; color: #aaa; margin-bottom: 6px; text-align: center;}
+        .quad-item input { background-color: #121212; border: 1px solid #666; color: #fff; padding: 10px; border-radius: 6px; font-size: 1.2rem; text-align: center; width: 100%; box-sizing: border-box;}
+        .quad-item input:focus { border-color: var(--cyan); box-shadow: 0 0 5px var(--cyan); }
+        
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 20px 0; }
+        .card { background-color: var(--card-bg); padding: 25px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center;}
+        .card h3 { margin: 0 0 10px 0; color: #aaa; font-size: 1rem; font-weight: normal; }
+        .metric { font-size: 2.6rem; font-weight: bold; color: #fff; margin-bottom: 10px; }
+        .metric-sub { font-size: 0.95rem; color: #888; background: #222; padding: 8px 12px; border-radius: 6px; display: inline-block; margin: 0 auto;}
+        
+        .formula-box { background-color: rgba(219, 0, 17, 0.05); border-left: 4px solid var(--hsbc-red); padding: 15px; margin-bottom: 20px; font-size: 0.9rem; color: #ccc; border-radius: 0 8px 8px 0;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1 style="margin: 0; font-size: 1.8rem; display: flex; align-items: center; justify-content: center;">
+            🏦 汇丰控股 (00005) 估值中心 <span class="version-badge">V13 港股本土纯享版</span>
+        </h1>
+        <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #888;">全盘港币(HKD)直录，无缝衔接交易软件数据 | PB/PE/股息/股价 4向全联动</p>
+    </header>
+
+    <div class="formula-box">
+        <strong>💡 财报质量监测：</strong> 隐含 ROTE = 每股收益(EPS) ÷ 每股有形净资产(TNAV) | 实际分红率 = 每股派息 ÷ 每股收益
+    </div>
+
+    <div class="grid-layout">
+        <div class="panel" style="border-top: 3px solid var(--hsbc-red);">
+            <h3 class="panel-title red">📄 第一步：录入交易软件行情数据 (HK$)</h3>
+            <p style="font-size: 0.8rem; color: #888; margin-top: -10px;">(以下默认值已按 7.8 汇率折算为 2025 财报的港币绝对值)</p>
+            <div class="input-group">
+                <label>每股有形净资产 (TNAV)</label>
+                <input type="number" id="in_tnav" value="75.19" step="0.01" oninput="handleBaseChange()">
+            </div>
+            <div class="input-group">
+                <label>每股收益 (EPS)</label>
+                <input type="number" id="in_eps" value="11.78" step="0.01" oninput="handleBaseChange()">
+            </div>
+            <div class="input-group">
+                <label>年度每股派息总额 (DPS)</label>
+                <input type="number" id="in_dps" value="5.85" step="0.01" oninput="handleBaseChange()">
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 25px; background: #2a0a0a; padding: 10px; border-radius: 6px; font-size: 0.85rem;">
+                <span style="color: #aaa;">计算期末隐含 ROTE: <strong id="disp_rote" style="color:var(--hsbc-red); font-size:1.1rem;">0.0%</strong></span>
+                <span style="color: #aaa;">计算实际分红比率: <strong id="disp_payout" style="color:var(--hsbc-red); font-size:1.1rem;">0.0%</strong></span>
+            </div>
+        </div>
+
+        <div class="panel" style="border-top: 3px solid var(--cyan);">
+            <h3 class="panel-title cyan">📉 第二步：全维度盯盘联动测试 (HK$)</h3>
+            <p style="font-size: 0.8rem; color: #888; margin-top: -10px;">(修改下方任意一个输入框，其余三个会自动反推)</p>
+            
+            <div class="quad-grid">
+                <div class="quad-item">
+                    <label style="color:#fff;">模拟挂单市价 (HK$)</label>
+                    <input type="number" id="sim_price" value="59.50" step="0.1" oninput="updateFrom('price')" style="border-color: var(--cyan); color: var(--cyan); font-weight: bold;">
+                </div>
+                <div class="quad-item">
+                    <label>对应股息率 (%)</label>
+                    <input type="number" id="sim_yield" value="9.83" step="0.01" oninput="updateFrom('yield')">
+                </div>
+                <div class="quad-item">
+                    <label>对应市盈率 (PE)</label>
+                    <input type="number" id="sim_pe" value="5.05" step="0.01" oninput="updateFrom('pe')">
+                </div>
+                <div class="quad-item">
+                    <label>对应市净率 (PB)</label>
+                    <input type="number" id="sim_pb" value="0.79" step="0.01" oninput="updateFrom('pb')">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="metrics-grid">
+        <div class="card" id="card_market" style="border-top: 4px solid var(--cyan);">
+            <h3>当前大盘估值雷达</h3>
+            <div class="metric" id="out_status">计算中</div>
+            <div class="metric-sub" style="margin-top: 5px;">基于最新港币净资产测算</div>
+        </div>
+        
+        <div class="card" style="border-top: 4px solid var(--purple);">
+            <h3>专属持仓成本复盘</h3>
+            <div style="margin-bottom: 10px;">
+                <input type="number" id="in_cost" value="55.00" step="0.1" oninput="updateCost()" style="background: #121212; border: 1px solid var(--purple); color: #fff; padding: 8px; border-radius: 6px; font-size: 1.2rem; width: 120px; text-align: center; font-weight: bold;">
+                <span style="color: #aaa; font-size: 0.9rem; margin-left: 10px;">HK$ (真实买入价)</span>
+            </div>
+            <div class="metric-sub" style="background: rgba(156, 39, 176, 0.1); border: 1px solid rgba(156, 39, 176, 0.3);">
+                你的锁仓股息率 (YOC): <strong id="cost_yoc" style="color: var(--purple); font-size: 1.1rem;">0.00%</strong><br>
+                你的建仓估值: <span id="cost_pe">0.0</span> PE | <span id="cost_pb">0.0</span> PB
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 安全获取数值
+    function getVal(id) {
+        let val = parseFloat(document.getElementById(id).value);
+        return isNaN(val) ? 0.0001 : val; // 防止除以0报错
+    }
+
+    // 格式化输出
+    function setVal(id, val, fix=2) {
+        document.getElementById(id).value = val.toFixed(fix);
+    }
+
+    // 获取纯港币基本面数据
+    function getFundamentals() {
+        let tnav = getVal('in_tnav');
+        let eps = getVal('in_eps');
+        let dps = getVal('in_dps');
+        return { tnav: tnav, eps: eps, dps: dps };
+    }
+
+    // 财报区数据变动时，更新检测指标，并触发“由市价主导”的更新
+    function handleBaseChange() {
+        let fund = getFundamentals();
+        
+        let rote = (fund.eps / fund.tnav) * 100;
+        let payout = (fund.dps / fund.eps) * 100;
+        
+        document.getElementById('disp_rote').innerText = rote.toFixed(2) + "%";
+        document.getElementById('disp_payout').innerText = payout.toFixed(2) + "%";
+        
+        updateFrom('price'); 
+        updateCost();
+    }
+
+    // 核心四向联动引擎 (基于修改的输入框反推其他三个)
+    function updateFrom(source) {
+        let fund = getFundamentals();
+        let price = 0;
+
+        if (source === 'price') {
+            price = getVal('sim_price');
+            setVal('sim_yield', (fund.dps / price) *
