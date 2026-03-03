@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>汇丰控股 (00005) 港股本土估值器 V13</title>
+    <title>汇丰控股 (00005) 港股本土估值器 V14</title>
     <style>
         :root {
             --bg-color: #121212; --card-bg: #1e1e1e; --text-color: #e0e0e0;
@@ -53,9 +53,9 @@
 <div class="container">
     <header>
         <h1 style="margin: 0; font-size: 1.8rem; display: flex; align-items: center; justify-content: center;">
-            🏦 汇丰控股 (00005) 估值中心 <span class="version-badge">V13 港股本土纯享版</span>
+            🏦 汇丰控股 (00005) 估值中心 <span class="version-badge">V14 2025财报精准版</span>
         </h1>
-        <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #888;">全盘港币(HKD)直录，无缝衔接交易软件数据 | PB/PE/股息/股价 4向全联动</p>
+        <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #888;">已载入 2025 真实财报数据 (HK$) | 对抗 139 港币狂热情绪</p>
     </header>
 
     <div class="formula-box">
@@ -64,14 +64,14 @@
 
     <div class="grid-layout">
         <div class="panel" style="border-top: 3px solid var(--hsbc-red);">
-            <h3 class="panel-title red">📄 第一步：录入交易软件行情数据 (HK$)</h3>
-            <p style="font-size: 0.8rem; color: #888; margin-top: -10px;">(以下默认值已按 7.8 汇率折算为 2025 财报的港币绝对值)</p>
+            <h3 class="panel-title red">📄 第一步：底层真实盈利能力 (HK$)</h3>
+            <p style="font-size: 0.8rem; color: #888; margin-top: -10px;">(基于 2025 官方财报 TNAV:$9.64, EPS:$1.51, DPS:$0.75 折算)</p>
             <div class="input-group">
                 <label>每股有形净资产 (TNAV)</label>
                 <input type="number" id="in_tnav" value="75.19" step="0.01" oninput="handleBaseChange()">
             </div>
             <div class="input-group">
-                <label>每股收益 (EPS)</label>
+                <label>经调整每股收益 (EPS)</label>
                 <input type="number" id="in_eps" value="11.78" step="0.01" oninput="handleBaseChange()">
             </div>
             <div class="input-group">
@@ -79,31 +79,31 @@
                 <input type="number" id="in_dps" value="5.85" step="0.01" oninput="handleBaseChange()">
             </div>
             <div style="display: flex; justify-content: space-between; margin-top: 25px; background: #2a0a0a; padding: 10px; border-radius: 6px; font-size: 0.85rem;">
-                <span style="color: #aaa;">计算期末隐含 ROTE: <strong id="disp_rote" style="color:var(--hsbc-red); font-size:1.1rem;">0.0%</strong></span>
-                <span style="color: #aaa;">计算实际分红比率: <strong id="disp_payout" style="color:var(--hsbc-red); font-size:1.1rem;">0.0%</strong></span>
+                <span style="color: #aaa;">真实期末隐含 ROTE: <strong id="disp_rote" style="color:var(--hsbc-red); font-size:1.1rem;">0.0%</strong></span>
+                <span style="color: #aaa;">真实实际分红比率: <strong id="disp_payout" style="color:var(--hsbc-red); font-size:1.1rem;">0.0%</strong></span>
             </div>
         </div>
 
         <div class="panel" style="border-top: 3px solid var(--cyan);">
             <h3 class="panel-title cyan">📉 第二步：全维度盯盘联动测试 (HK$)</h3>
-            <p style="font-size: 0.8rem; color: #888; margin-top: -10px;">(修改下方任意一个输入框，其余三个会自动反推)</p>
+            <p style="font-size: 0.8rem; color: #888; margin-top: -10px;">(尝试修改 PB 到 0.9，看看合理的击球价是多少)</p>
             
             <div class="quad-grid">
                 <div class="quad-item">
-                    <label style="color:#fff;">模拟挂单市价 (HK$)</label>
-                    <input type="number" id="sim_price" value="59.50" step="0.1" oninput="updateFrom('price')" style="border-color: var(--cyan); color: var(--cyan); font-weight: bold;">
+                    <label style="color:#fff;">当前挂单市价 (HK$)</label>
+                    <input type="number" id="sim_price" value="139.0" step="0.1" oninput="updateFrom('price')" style="border-color: var(--hsbc-red); color: var(--hsbc-red); font-weight: bold;">
                 </div>
                 <div class="quad-item">
                     <label>对应股息率 (%)</label>
-                    <input type="number" id="sim_yield" value="9.83" step="0.01" oninput="updateFrom('yield')">
+                    <input type="number" id="sim_yield" value="4.21" step="0.01" oninput="updateFrom('yield')">
                 </div>
                 <div class="quad-item">
                     <label>对应市盈率 (PE)</label>
-                    <input type="number" id="sim_pe" value="5.05" step="0.01" oninput="updateFrom('pe')">
+                    <input type="number" id="sim_pe" value="11.80" step="0.01" oninput="updateFrom('pe')">
                 </div>
                 <div class="quad-item">
                     <label>对应市净率 (PB)</label>
-                    <input type="number" id="sim_pb" value="0.79" step="0.01" oninput="updateFrom('pb')">
+                    <input type="number" id="sim_pb" value="1.85" step="0.01" oninput="updateFrom('pb')">
                 </div>
             </div>
         </div>
@@ -113,14 +113,14 @@
         <div class="card" id="card_market" style="border-top: 4px solid var(--cyan);">
             <h3>当前大盘估值雷达</h3>
             <div class="metric" id="out_status">计算中</div>
-            <div class="metric-sub" style="margin-top: 5px;">基于最新港币净资产测算</div>
+            <div class="metric-sub" style="margin-top: 5px;">基于最新 17.2% ROTE 测算</div>
         </div>
         
         <div class="card" style="border-top: 4px solid var(--purple);">
             <h3>专属持仓成本复盘</h3>
             <div style="margin-bottom: 10px;">
-                <input type="number" id="in_cost" value="55.00" step="0.1" oninput="updateCost()" style="background: #121212; border: 1px solid var(--purple); color: #fff; padding: 8px; border-radius: 6px; font-size: 1.2rem; width: 120px; text-align: center; font-weight: bold;">
-                <span style="color: #aaa; font-size: 0.9rem; margin-left: 10px;">HK$ (真实买入价)</span>
+                <input type="number" id="in_cost" value="139.0" step="0.1" oninput="updateCost()" style="background: #121212; border: 1px solid var(--purple); color: #fff; padding: 8px; border-radius: 6px; font-size: 1.2rem; width: 120px; text-align: center; font-weight: bold;">
+                <span style="color: #aaa; font-size: 0.9rem; margin-left: 10px;">HK$ (假设现价买入)</span>
             </div>
             <div class="metric-sub" style="background: rgba(156, 39, 176, 0.1); border: 1px solid rgba(156, 39, 176, 0.3);">
                 你的锁仓股息率 (YOC): <strong id="cost_yoc" style="color: var(--purple); font-size: 1.1rem;">0.00%</strong><br>
@@ -131,18 +131,15 @@
 </div>
 
 <script>
-    // 安全获取数值
     function getVal(id) {
         let val = parseFloat(document.getElementById(id).value);
-        return isNaN(val) ? 0.0001 : val; // 防止除以0报错
+        return isNaN(val) ? 0.0001 : val; 
     }
 
-    // 格式化输出
     function setVal(id, val, fix=2) {
         document.getElementById(id).value = val.toFixed(fix);
     }
 
-    // 获取纯港币基本面数据
     function getFundamentals() {
         let tnav = getVal('in_tnav');
         let eps = getVal('in_eps');
@@ -150,25 +147,86 @@
         return { tnav: tnav, eps: eps, dps: dps };
     }
 
-    // 财报区数据变动时，更新检测指标，并触发“由市价主导”的更新
     function handleBaseChange() {
         let fund = getFundamentals();
-        
         let rote = (fund.eps / fund.tnav) * 100;
         let payout = (fund.dps / fund.eps) * 100;
         
-        document.getElementById('disp_rote').innerText = rote.toFixed(2) + "%";
-        document.getElementById('disp_payout').innerText = payout.toFixed(2) + "%";
+        document.getElementById('disp_rote').innerText = rote.toFixed(1) + "%";
+        document.getElementById('disp_payout').innerText = payout.toFixed(1) + "%";
         
         updateFrom('price'); 
         updateCost();
     }
 
-    // 核心四向联动引擎 (基于修改的输入框反推其他三个)
     function updateFrom(source) {
         let fund = getFundamentals();
         let price = 0;
 
         if (source === 'price') {
             price = getVal('sim_price');
-            setVal('sim_yield', (fund.dps / price) *
+            setVal('sim_yield', (fund.dps / price) * 100);
+            setVal('sim_pe', price / fund.eps);
+            setVal('sim_pb', price / fund.tnav);
+        } 
+        else if (source === 'yield') {
+            let yld = getVal('sim_yield') / 100;
+            price = fund.dps / yld;
+            setVal('sim_price', price);
+            setVal('sim_pe', price / fund.eps);
+            setVal('sim_pb', price / fund.tnav);
+        }
+        else if (source === 'pe') {
+            let pe = getVal('sim_pe');
+            price = pe * fund.eps;
+            setVal('sim_price', price);
+            setVal('sim_yield', (fund.dps / price) * 100);
+            setVal('sim_pb', price / fund.tnav);
+        }
+        else if (source === 'pb') {
+            let pb = getVal('sim_pb');
+            price = pb * fund.tnav;
+            setVal('sim_price', price);
+            setVal('sim_yield', (fund.dps / price) * 100);
+            setVal('sim_pe', price / fund.eps);
+        }
+
+        updateStatus(price, fund.tnav);
+    }
+
+    function updateCost() {
+        let fund = getFundamentals();
+        let cost = getVal('in_cost');
+        
+        document.getElementById('cost_yoc').innerText = ((fund.dps / cost) * 100).toFixed(2) + "%";
+        document.getElementById('cost_pe').innerText = (cost / fund.eps).toFixed(2);
+        document.getElementById('cost_pb').innerText = (cost / fund.tnav).toFixed(2);
+    }
+
+    function updateStatus(price, tnav) {
+        let pb = price / tnav;
+        let statusEl = document.getElementById('out_status');
+        let cardEl = document.getElementById('card_market');
+        
+        if (pb < 0.9) {
+            statusEl.innerText = "🔥 深度破净击球区";
+            statusEl.style.color = "var(--green)";
+            cardEl.style.borderTopColor = "var(--green)";
+        } else if (pb <= 1.2) {
+            statusEl.innerText = "✅ 合理常态收息区";
+            statusEl.style.color = "var(--cyan)";
+            cardEl.style.borderTopColor = "var(--cyan)";
+        } else {
+            statusEl.innerText = "🔴 极度溢价(PB>1.2)";
+            statusEl.style.color = "var(--hsbc-red)";
+            cardEl.style.borderTopColor = "var(--hsbc-red)";
+        }
+    }
+
+    window.onload = function() {
+        handleBaseChange();
+    };
+</script>
+
+</body>
+</html>
